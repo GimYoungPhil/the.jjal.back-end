@@ -9,24 +9,30 @@ var client = tumblr.createClient({
   token_secret: 'keX1tcvbdOLHhltl1HMBaMhN4sovxj2EycERSvJF0OFFOZnhTZ'
 });
 
-
+var blogName = 'n-i-c-e-d-r-e-a-m';
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-
-    client.userInfo(function (err, data) {
-    // data.blogs.forEach(function (blog) {
-    //     console.log(blog.name);
-        res.send(data);
-    });
-
-    return false;
+  client.userInfo(function (err, data) {
+    res.send(data);
+  });
+  return false;
 });
 
-  // res.send({
-  //   name: 'hi',
-  //   msg: 'cool'
-  // });
+router.get('/info', function(req, res, next) {
+  client.blogInfo(blogName, function(err, data) {
+    res.send(data);
+  });
 
+  return false;
+});
+
+router.get('/photo', function(req, res, next) {
+  client.posts(blogName, {}, function(err, data) {
+    res.send(data);
+  });
+
+  return false;
+});
 
 module.exports = router;
