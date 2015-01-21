@@ -28,7 +28,8 @@ router.get('/info', function(req, res, next) {
 });
 
 router.get('/photo', function(req, res, next) {
-  client.posts(blogName, {}, function(err, data) {
+  console.log({limit: req.query.limit, offset: req.query.offset});
+  client.posts(blogName, {limit: req.query.limit, offset: req.query.offset}, function(err, data) {
     res.send(data);
   });
 
